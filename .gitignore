@@ -1,0 +1,13 @@
+# ignore packages installed by npm
+node_modules
+
+# Can ignore specific files
+.DS_Store
+
+# Ignore Folders
+public/icons/
+public/images/
+
+# Backupfiles
+*~
+.DS_Store

@@ -1,0 +1,19 @@
+{
+  "name": "GWnode",
+  "version": "1.0.0",
+  "description": "Build GuessWhapp Site with JS stack",
+  "main": "GuessWhapp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "y"
+  },
+  "author": "Olaf Peters",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.10.4",
+    "express3-handlebars": "^0.5.2"
+  }
+}
