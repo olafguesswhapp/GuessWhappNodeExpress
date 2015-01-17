@@ -15,11 +15,21 @@ app.set('port', process.env.PORT || 3000);
 
 app.use(express.static(__dirname + '/public'));
 
-app.get('/', function(req, res) {
-	var randomGWcode = gwcode[Math.floor(Math.random() * gwcode.length)];
-	res.render('home', {gwcode: randomGWcode});
+// set 'showTests' context property if the querystring contains test=1
+app.use(function(req, res, next){
+	res.locals.showTests = app.get('env') !== 'production' && req.query.test === '1';
+	next();
 });
 
+app.get('/', function(req, res) {
+	var randomGWcode = gwcode[Math.floor(Math.random() * gwcode.length)];
+	res.render('home', {
+		gwcode: randomGWcode,
+		pageTestScript: 'qa/tests-menuLinks.js'
+	});
+});
+
+// routes
 app.get('/team', function(req,res){
 	res.render('team', {layout: 'sub'});
 });

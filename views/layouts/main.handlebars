@@ -6,6 +6,10 @@
 	<meta name="generator" content="Sublime Text 2" />
 
 	<title>GuessWhapp &#124; Help your Readers interact with your Blog!</title>
+	{{#if showTests}}
+			<link rel="stylesheet" href="/vendor/mocha.css">
+	{{/if}}
+	<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 	<link rel='stylesheet' id='responsive-style-css'  href='css/GWde.css' type='text/css' media='all' />
 	{{> analytics}}
 </head>
@@ -15,5 +19,21 @@
 		{{{body}}}
 		{{> footer}}
 	</div>
+
+	{{#if showTests}}
+		<div id="mocha"></div>
+		<script src="/vendor/mocha.js"></script>
+		<script src="/vendor/chai.js"></script>
+		<script>
+			mocha.ui('tdd');
+			var assert = chai.assert;
+		</script>
+		<script src="/qa/tests-global.js"></script>
+		{{#if pageTestScript}}
+			<script src="{{pageTestScript}}"></script>
+		{{/if}}
+		<script>mocha.run();</script>
+	{{/if}}
+	
 </body>
 </html>
