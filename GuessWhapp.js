@@ -1,7 +1,6 @@
-var express = require('express');
-var app = express();
-
-var gwcode = [647, 646, 730];
+var express = require('express'),
+	gwcode = require('./GuessWhappConfig.json'), //List of GuessWhapps which will be displayed Random on LandingPage
+	app = express();
 
 // set up handlebars view engine
 var handlebars = require('express3-handlebars')
