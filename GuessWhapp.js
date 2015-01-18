@@ -1,60 +1,62 @@
-var express = require('express'),
-	gwcode = require('./GuessWhappConfig.json'), //List of GuessWhapps which will be displayed Random on LandingPage
+/*jslint node: true */
+"use strict";
+var express = require("express"),
+	gwcode = require("./GuessWhappConfig.json"), //List of GuessWhapps which will be displayed Random on LandingPage
 	app = express();
 
 // set up handlebars view engine
-var handlebars = require('express3-handlebars')
+var handlebars = require("express3-handlebars")
 	.create({
-			defaultLayout:'main'});
+			defaultLayout:"main"});
 	
-app.engine('handlebars', handlebars.engine);
-app.set('view engine', 'handlebars');
+app.engine("handlebars", handlebars.engine);
+app.set("view engine", "handlebars");
 
-app.set('port', process.env.PORT || 3000);
+app.set("port", process.env.PORT || 3000);
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + "/public"));
 
-// set 'showTests' context property if the querystring contains test=1
+// set "showTests" context property if the querystring contains test=1
 app.use(function(req, res, next){
-	res.locals.showTests = app.get('env') !== 'production' && req.query.test === '1';
+	res.locals.showTests = app.get("env") !== "production" && req.query.test === "1";
 	next();
 });
 
-app.get('/', function(req, res) {
+app.get("/", function(req, res) {
 	var randomGWcode = gwcode[Math.floor(Math.random() * gwcode.length)];
-	res.render('home', {
+	res.render("home", {
 		gwcode: randomGWcode,
-		pageTestScript: 'qa/tests-menuLinks.js'
+		pageTestScript: "qa/tests-menuLinks.js"
 	});
 });
 
 // routes
-app.get('/team', function(req,res){
-	res.render('team', {layout: 'sub'});
+app.get("/team", function(req,res){
+	res.render("team", {layout: "sub"});
 });
 
-app.get('/wieesfunktioniert', function(req,res){
-	res.render('wieesfunktioniert', {layout: 'sub'});
+app.get("/wieesfunktioniert", function(req,res){
+	res.render("wieesfunktioniert", {layout: "sub"});
 });
 
-app.get('/impressum', function(req,res){
-	res.render('impressum', {layout: 'sub'});
+app.get("/impressum", function(req,res){
+	res.render("impressum", {layout: "sub"});
 });
 
 // 404 catch-all handler (middleware)
 app.use(function(req, res, next){
 	res.status(404);
-	res.render('404');
+	res.render("404");
 });
 
 // 500 error handler (middleware)
 app.use(function(err, req, res, next){
 	console.error(err.stack);
 	res.status(500);
-	res.render('500');
+	res.render("500");
 });
 
-app.listen(app.get('port'), function(){
-  console.log( 'Express started on http://localhost:' + 
-    app.get('port') + '; press Ctrl-C to terminate.' );
+app.listen(app.get("port"), function(){
+  console.log( "Express started on http://localhost:" + 
+    app.get("port") + "; press Ctrl-C to terminate." );
 });
